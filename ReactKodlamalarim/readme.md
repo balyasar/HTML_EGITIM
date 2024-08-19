@@ -238,7 +238,7 @@ npm i react-router-dom
   kurulum ve kullanımı basittir.
   Kurulum:
 ```bash
-pm i sweetalert --save
+npm i sweetalert --save
 ```
   Kullanım:
   öncelikle import ediniz.
