@@ -211,7 +211,7 @@ export interface IMusteri{
 
   bootstrap kullanmak için öncelikle kurulum yapıyoruz.
 ```bash
-npm i bootstrap@5.3.3.
+  npm i bootstrap@5.3.3
 ```
   boorstrap kullanabilmek için root a yani index.tsx e import etmeniz gerekli
   olan kodu eklemelisiniz.

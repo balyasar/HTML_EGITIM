@@ -7,7 +7,9 @@ function ProductList() {
   const getAllProduct = () => {
     fetch('https://dummyjson.com/products') // ilgili adrese get isteği at
       .then(data => data.json()) // dönen dataları json'a çevir
-      .then(response => setProductList(response.products)) // json array şeklinde gelen datayı product list'e yükle
+      .then(response => 
+        setProductList(response.products)// json array şeklinde gelen datayı product list'e yükle
+      ) 
   };
 
   return (
