@@ -261,3 +261,16 @@ fetch('http://localhost:8080/user/register',{
       })
     })
 ```
+
+## React Redux-Toolkit Kurulum ve Kullanımları
+
+```bash
+npm install @reduxjs/toolkit
+
+npm install react-redux
+```
+
+  Redux toolkit bize 2 kullanımı yönetme imkanı sağlar.
+  1 - Global state management, uygulamanın her noktasından erişilebilir ve 
+  takip edilebilir stateler
+  2 - Fetch işlemlerinin daha yönetilebilir şekilde kullanımını sağlar. 

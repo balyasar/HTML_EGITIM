@@ -1,4 +1,4 @@
-package com.muhammet.hslogin.dto.response;
+package com.muhammet.hslogin.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
