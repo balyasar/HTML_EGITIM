@@ -15,7 +15,10 @@ function BestSellerCard(props: BestSellerCardProps) {
                 <div className="p-4 rounded bg-light">
                     <div className="row align-items-center">
                         <div className="col-6">
-                            <img src={props.image} className="img-fluid rounded-circle w-100" alt="" />
+                            <img src={props.image}
+                                className="img-fluid rounded-circle w-100" alt=""
+                                style={{ height: '200px' }}
+                            />
                         </div>
                         <div className="col-6">
                             <a href="#" className="h5">{props.title} </a>
@@ -32,7 +35,9 @@ function BestSellerCard(props: BestSellerCardProps) {
         return (
             <div className="col-md-6 col-lg-6 col-xl-3">
                 <div className="text-center">
-                    <img src={props.image} className="img-fluid rounded" alt="" />
+                    <img src={props.image}
+                        className="img-fluid rounded w-100" alt=""
+                        style={{ height: '250px' }} />
                     <div className="py-4">
                         <a href="#" className="h5">{props.title}</a>
                         <Rate rate={props.rate} position='justify-content-center' />

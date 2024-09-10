@@ -15,13 +15,19 @@ function ProductCard(props: ProductCardProps) {
                     <div className="fruite-img">
                         <img src={props.image}
                             className="img-fluid w-100 rounded-top"
+                            style={{ height: '300px' }}
                             alt="" />
                     </div>
                     <div className="text-white bg-secondary px-3 py-1 rounded position-absolute"
                         style={{ top: '10px', left: '10px' }}>{props.categoryName}</div>
                     <div className="p-4 border border-secondary border-top-0 rounded-bottom">
                         <h4>{props.name}</h4>
-                        <p>{props.content}</p>
+                        <p>{
+                            props.content.length > 40 ?
+                                props.content.substring(0, 40) + '...' :
+                                props.content
+                        }
+                        </p>
                         <div className="d-flex justify-content-between flex-lg-wrap">
                             <p className="text-dark fs-5 fw-bold mb-0">{props.price}</p>
                             <a href="#"

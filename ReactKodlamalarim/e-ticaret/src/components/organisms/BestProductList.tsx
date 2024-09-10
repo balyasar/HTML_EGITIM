@@ -1,48 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BestProductButton from '../atoms/BestProductButton'
 import ProductCard from '../molecules/ProductCard'
+import { useDispatch } from 'react-redux'
+import { ETicaretDispatch, useGlobalSelector } from '../../store';
+import { fetchGetAllProducts } from '../../store/feature/productSlice';
+import { IProduct } from '../../models/IProduct';
 
 function BestProductList() {
-    const urunList = [
-        {
-            image: 'img/fruite-item-1.jpg',
-            categoryName: 'Fruits',
-            name: 'Ahududu',
-            content: 'Bu yaz aylarında yetişen güzel bir meyvedir.',
-            price: '4.99₺/kg'
-        },
-        {
-            image: 'img/fruite-item-2.jpg',
-            categoryName: 'Fruits',
-            name: 'Üzüm',
-            content: 'Bu yaz aylarında yetişen güzel bir meyvedir.',
-            price: '7.99₺/kg'
-        },
-        {
-            image: 'img/fruite-item-3.jpg',
-            categoryName: 'Fruits',
-            name: 'Elma',
-            content: 'Bu yaz aylarında yetişen güzel bir meyvedir.',
-            price: '3.99₺/kg'
-        },
-        {
-            image: 'img/fruite-item-4.jpg',
-            categoryName: 'Fruits',
-            name: 'Çilek',
-            content: 'Bu yaz aylarında yetişen güzel bir meyvedir.',
-            price: '9.99₺/kg'
-        },
-        {
-            image: 'img/fruite-item-5.jpg',
-            categoryName: 'Fruits',
-            name: 'Ejder Meyvesi',
-            content: 'Bu yaz aylarında yetişen güzel bir meyvedir.',
-            price: '14.99₺/kg'
-        },
-
-
-    ]
-
+    const dispatch: ETicaretDispatch = useDispatch();
+    const productList = useGlobalSelector(state => state.product.urunList)
+    // Bir function içerisinde sadece bir defa çalışacak olan method oluşturmak
+    // istiyorsanız bunu useEffect kullanarak yapabilirsiniz.
+    // Bu Java'da bir constructor oluşturmaya benzer.
+    useEffect(() => {
+        dispatch(fetchGetAllProducts())
+    }, [])
     return (
         <>
             <div className="container-fluid fruite py-5">
@@ -68,12 +40,13 @@ function BestProductList() {
                                     <div className="col-lg-12">
                                         <div className="row g-4">
                                             {
-                                                urunList.map((urun, index) => {
-                                                    return <ProductCard name={urun.name}
-                                                        categoryName={urun.categoryName}
-                                                        price={urun.price}
-                                                        image={urun.image}
-                                                        content={urun.content} />
+                                                productList.map((product: IProduct, index) => {
+                                                    return <ProductCard
+                                                        name={product.name}
+                                                        content={product.description}
+                                                        categoryName={product.name}
+                                                        price={product.price + '₺'}
+                                                        image={product.imageUrl} />
                                                 })
                                             }
                                         </div>

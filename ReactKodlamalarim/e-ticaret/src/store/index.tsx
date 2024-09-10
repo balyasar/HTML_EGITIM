@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
-    authSlice
+    authSlice,
+    productSlice
 } from "./feature";
 import { useSelector } from "react-redux";
 
 const store = configureStore({
     reducer: {
-        auth: authSlice
+        auth: authSlice,
+        product: productSlice,
     }
 })
 // Store içerisindeki bileşenlerin TypeScript tarafından yönetimi ve tanımı için

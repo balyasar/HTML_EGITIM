@@ -1,80 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BestSellerCard from '../molecules/BestSellerCard'
+import { ETicaretDispatch, useGlobalSelector } from '../../store'
+import { useDispatch } from 'react-redux'
+import { fetchGetAllBestSellerProduct } from '../../store/feature/productSlice';
+import { IBestSellerProduct } from '../../models/IBestSellerProduct';
 
 function BestSeller() {
-    const sellerList = [
-        {
-            type: 1,
-            image: 'img/best-product-1.jpg',
-            title: 'Portakal',
-            price: '45 ₺',
-            rate: 4
-        },
-        {
-            type: 1,
-            image: 'img/best-product-2.jpg',
-            title: 'Ahududu',
-            price: '68 ₺',
-            rate: 5
-        },
-        {
-            type: 1,
-            image: 'img/best-product-3.jpg',
-            title: 'Muz',
-            price: '49 ₺',
-            rate: 3
-        },
-        {
-            type: 1,
-            image: 'img/best-product-4.jpg',
-            title: 'Kayısı',
-            price: '32 ₺',
-            rate: 3
-        },
-        {
-            type: 1,
-            image: 'img/best-product-5.jpg',
-            title: 'Üzüm',
-            price: '55 ₺',
-            rate: 1
-        },
-        {
-            type: 1,
-            image: 'img/best-product-6.jpg',
-            title: 'Elma',
-            price: '20 ₺',
-            rate: 4
-        },
-        {
-            type: 2,
-            image: 'img/best-product-1.jpg',
-            title: 'Portakal',
-            price: '45 ₺',
-            rate: 4
-        },
-        {
-            type: 2,
-            image: 'img/best-product-2.jpg',
-            title: 'Ahududu',
-            price: '68 ₺',
-            rate: 5
-        },
-        {
-            type: 2,
-            image: 'img/best-product-3.jpg',
-            title: 'Muz',
-            price: '49 ₺',
-            rate: 3
-        },
-        {
-            type: 2,
-            image: 'img/best-product-4.jpg',
-            title: 'Kayısı',
-            price: '32 ₺',
-            rate: 3
-        }
-    ]
-
+    const dispatch: ETicaretDispatch = useDispatch();
+    const bestSellerList = useGlobalSelector(state => state.product.popularProductList)
+    useEffect(() => {
+        dispatch(fetchGetAllBestSellerProduct());
+    }, [])
     return (
         <>
             <div className="container-fluid py-5">
@@ -85,13 +21,13 @@ function BestSeller() {
                     </div>
                     <div className="row g-4">
                         {
-                            sellerList.map((urun, index) => {
+                            bestSellerList.map((bestSeller: IBestSellerProduct, index) => {
                                 return <BestSellerCard
-                                    type={urun.type}
-                                    image={urun.image}
-                                    price={urun.price}
-                                    title={urun.title}
-                                    rate={urun.rate}
+                                    type={bestSeller.type}
+                                    image={bestSeller.image}
+                                    price={bestSeller.price}
+                                    title={bestSeller.title}
+                                    rate={bestSeller.rate}
                                 />
                             })
                         }
