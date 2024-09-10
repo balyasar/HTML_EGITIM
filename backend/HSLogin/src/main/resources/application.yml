@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://35.238.4.122:5432/javahs1_eticaret
+    url: jdbc:postgresql://localhost:5432/javahs1_eticaret
     username: postgres
-    password: Bilge*!
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
