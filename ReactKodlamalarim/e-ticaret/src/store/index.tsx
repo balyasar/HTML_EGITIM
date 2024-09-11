@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
     authSlice,
-    productSlice
+    categorySlice,
+    productSlice,
 } from "./feature";
 import { useSelector } from "react-redux";
 
@@ -9,6 +10,7 @@ const store = configureStore({
     reducer: {
         auth: authSlice,
         product: productSlice,
+        category: categorySlice,
     }
 })
 // Store içerisindeki bileşenlerin TypeScript tarafından yönetimi ve tanımı için

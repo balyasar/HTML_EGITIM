@@ -23,6 +23,7 @@ public class CategoryController {
     }
 
     @GetMapping("/get-all-categories")
+    @CrossOrigin("*")
     public ResponseEntity<List<CategoryResponseDto>> getAllCategories() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }

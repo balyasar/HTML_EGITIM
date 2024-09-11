@@ -1,26 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ETicaretDispatch, useGlobalSelector } from '../../store';
 import { useDispatch } from 'react-redux';
 import { fetchAddProduct, fetchGetAllProducts } from '../../store/feature/productSlice';
 import { IProduct } from '../../models/IProduct';
+import { fetchGetAllCategory } from '../../store/feature/categorySlice';
+import { ICategoryList } from '../../models/ICategoryList';
+import swal from 'sweetalert';
 
 function AdminPanel() {
   const dispatch: ETicaretDispatch = useDispatch();
   const productList: IProduct[] = useGlobalSelector(state => state.product.urunList);
+  const categoryList: ICategoryList[] = useGlobalSelector(state => state.category.categoryList);
+  const [name, setName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [price, setPrice] = useState(0);
+  const [description, setDescription] = useState('');
+  const [stock, setStock] = useState(0);
+  const [categoryId, setCategoryId] = useState(0);
   const addProduct = () => {
     dispatch(fetchAddProduct({
-      name: '',
-      imageUrl: '',
-      price: 0,
-      description: '',
-      stock: 0,
-      categoryId: 0
-
-    }))
+      name: name,
+      imageUrl: imageUrl,
+      price: price,
+      description: description,
+      stock: stock,
+      categoryId: categoryId
+    })).then(() =>
+      swal('Ekleme İşlemi', 'Ürün Ekleme İşlemi Başarılı', 'success')
+        .then(() => dispatch(fetchGetAllProducts()))
+    )
   }
   useEffect(() => {
-    dispatch(fetchGetAllProducts());
+    dispatch(fetchGetAllProducts())
+    dispatch(fetchGetAllCategory())
   }, [])
+
   return (
     <>
       <div className="container">
@@ -28,29 +42,34 @@ function AdminPanel() {
           <div className="col-8">
             <div className="mb-3">
               <label className='form-label'>Ürün Adı</label>
-              <input className='form-control' type="text" name="" id="" />
+              <input onChange={(evt) => setName(evt.target.value)} className='form-control' type="text" name="" id="" />
             </div>
             <div className="mb-3">
               <label className='form-label'>Ürün Açıklaması</label>
-              <input className='form-control' type="text" name="" id="" />
+              <input onChange={(evt) => setDescription(evt.target.value)} className='form-control' type="text" name="" id="" />
             </div>
             <div className="mb-3">
               <label className='form-label'>Ürün Fiyatı</label>
-              <input className='form-control' type="text" name="" id="" />
+              <input onChange={(evt) => setPrice(parseInt(evt.target.value))} className='form-control' type="text" name="" id="" />
             </div>
             <div className="mb-3">
               <label className='form-label'>Ürün Resmi</label>
-              <input className='form-control' type="text" name="" id="" />
+              <input onChange={(evt) => setImageUrl(evt.target.value)} className='form-control' type="text" name="" id="" />
             </div>
             <div className="mb-3">
               <label className='form-label'>Ürün Kategorisi</label>
-              <select className='form-control'>
+              <select onChange={(evt) => setCategoryId(parseInt(evt.target.value))} className='form-control'>
                 <option>Seçiniz</option>
+                {categoryList.map((category, index) => {
+                  return (
+                    <option value={category.categoryId}>{category.categoryName}</option>
+                  )
+                })}
               </select>
             </div>
             <div className="mb-3">
               <label className='form-label'>Ürün Stok</label>
-              <input className='form-control' type="text" name="" id="" />
+              <input onChange={(evt) => setStock(parseInt(evt.target.value))} className='form-control' type="text" name="" id="" />
             </div>
           </div>
           <div className="col-4 align-content-end">

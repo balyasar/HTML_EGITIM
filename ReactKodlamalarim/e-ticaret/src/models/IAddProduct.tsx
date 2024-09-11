@@ -1,8 +1,8 @@
 export interface IAddProduct {
     name: string,
     description: string,
-    categoryId: 0,
-    price: 0,
+    categoryId: number,
+    price: number,
     imageUrl: string,
-    stock: 0
+    stock: number
 }
